@@ -21,9 +21,14 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String firstName;
 
+    @Column(name = "last_name")
+    private String lastName;
+
+    private int age;
+
     private String password;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @LazyCollection(LazyCollectionOption.EXTRA)
     @Fetch(FetchMode.JOIN)
     @JoinTable(name = "users_roles",
@@ -31,18 +36,16 @@ public class User implements UserDetails {
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @Column(name = "last_name")
-    private String lastName;
-
-    private int age;
-
     public User() {
     }
 
-    public User(String firstName, String lastName, int age) {
+    public User(Long id, String firstName, String lastName, int age, String password, Set<Role> roles) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
+        this.password = password;
+        this.roles = roles;
     }
 
     public Long getId() {

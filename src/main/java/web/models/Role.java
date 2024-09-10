@@ -15,7 +15,7 @@ public class Role implements GrantedAuthority {
 
     private String name;
 
-    /*@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    /*@ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
     private Set<User> users = new HashSet<>();*/
 
     public Role() {
@@ -45,6 +45,14 @@ public class Role implements GrantedAuthority {
     public void setName(String name) {
         this.name = name;
     }
+
+    /*public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }*/
 
     @Override
     public String getAuthority() {
