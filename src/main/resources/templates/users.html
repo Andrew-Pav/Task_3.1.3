@@ -189,7 +189,8 @@
 
                                         <!--              КНОПКА DELETE              -->
                                         <td>
-                                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            <button class="btn btn-danger btn-sm"
+                                                    data-bs-toggle="modal"
                                                     th:data-bs-target="${'#deleteModal' + user.getId()}">
                                                 Delete
                                             </button>
@@ -206,7 +207,8 @@
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                         </div>
                                                         <div class="modal-body w-60 m-auto text-center mb-3 fw-bold">
-                                                            <form th:method="post" th:action="@{/admin/deleteUser}">
+                                                            <form th:method="get"
+                                                                  th:action="@{/admin/deleteUser}">
                                                                 <input type="hidden" th:value="${user.id}" name="id">
 
                                                                 <label for="idDelete" class="form-label">ID</label>
@@ -327,11 +329,11 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row" th:text="${currentUser.getId()}"></th>
-                                    <td th:text="${currentUser.getFirstName()}"></td>
-                                    <td th:text="${currentUser.getLastName()}"></td>
-                                    <td th:text="${currentUser.getAge()}"></td>
+                                <tr th:each="admin_user : ${currentUser}">
+                                    <th scope="row" th:text="${admin_user.getId()}"></th>
+                                    <td th:text="${admin_user.getFirstName()}"></td>
+                                    <td th:text="${admin_user.getLastName()}"></td>
+                                    <td th:text="${admin_user.getAge()}"></td>
                                     <td>
                                         <span th:each="currRoles : ${currentUser.getRoles()}"
                                               th:text="${currRoles.getName()} + ' '"></span>
